@@ -15,6 +15,7 @@ var conn = new jsforce.Connection({
 var username = 'isifuentes@demo3.com.dev';
 var password = 'Freeway$2022';
 conn.login(username, password, function(err, userInfo) {
+  console.log("attempting to auth salesforce");
   if (err) { return console.error(err); }
   // Now you can get the access token and instance URL information.
   // Save them to establish connection next time.
