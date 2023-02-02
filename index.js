@@ -43,6 +43,7 @@ app.post('/facebook', function(req, res) {
   // Process the Facebook updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
+
   var conn = new jsforce.Connection({
     oauth2 : {
       // you can change loginUrl to connect to sandbox or prerelease env.
@@ -64,15 +65,14 @@ app.post('/facebook', function(req, res) {
     // logged in user property
     console.log("User ID: " + userInfo.id);
     console.log("Org ID: " + userInfo.organizationId);
-    // ...
-    var records = [];
-    conn.query("SELECT Id, Name FROM Account", function(err, result) {
-      if (err) { return console.error(err); }
-      console.log("total : " + result.totalSize);
-      console.log("fetched : " + result.records.length);
-      records = result.records;
-      console.log("results : " + records);
-    });
+    
+    //Salesforce comment insert.
+    var body = received_updates.unshift(req.body);
+    conn.apex.post("/InsertFBComment/", body, function(err, res) {
+        if (err) { return console.error(err); }
+        console.log("response: ", res);
+        // the response object structure depends on the definition of apex class
+      });
   });
 });
 
