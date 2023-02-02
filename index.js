@@ -3,37 +3,7 @@ var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
 var jsforce = require('jsforce');
-var conn = new jsforce.Connection({
-  oauth2 : {
-    // you can change loginUrl to connect to sandbox or prerelease env.
-    loginUrl : 'https://test.salesforce.com',
-    clientId : '3MVG99VEEJ_Bj3.59zyuavq.GeuRs01dCd2FDWGc6grsKqBhj2WolvLYn53PAfSgzw4DNxHWKrDkXCZWqGYNZ',
-    clientSecret : 'B342B22F60D960A0F693C7FFFB8F937913C2C54829B3F664FBBC30896DFCA1AE',
-    redirectUri : 'https://fr1638910969386--dev.sandbox.lightning.force.com'
-  }
-});
-var username = 'isifuentes@demo3.com.dev';
-var password = 'Freeway$2022';
-conn.login(username, password, function(err, userInfo) {
-  console.log("attempting to auth salesforce");
-  if (err) { return console.error(err); }
-  // Now you can get the access token and instance URL information.
-  // Save them to establish connection next time.
-  console.log(conn.accessToken);
-  console.log(conn.instanceUrl);
-  // logged in user property
-  console.log("User ID: " + userInfo.id);
-  console.log("Org ID: " + userInfo.organizationId);
-  // ...
-  var records = [];
-  conn.query("SELECT Id, Name FROM Account", function(err, result) {
-    if (err) { return console.error(err); }
-    console.log("total : " + result.totalSize);
-    console.log("fetched : " + result.records.length);
-    records = result.records;
-    console.log("results : " + records);
-  });
-});
+
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
@@ -73,6 +43,37 @@ app.post('/facebook', function(req, res) {
   // Process the Facebook updates here
   received_updates.unshift(req.body);
   res.sendStatus(200);
+  var conn = new jsforce.Connection({
+    oauth2 : {
+      // you can change loginUrl to connect to sandbox or prerelease env.
+      loginUrl : 'https://test.salesforce.com',
+      clientId : '3MVG99VEEJ_Bj3.59zyuavq.GeuRs01dCd2FDWGc6grsKqBhj2WolvLYn53PAfSgzw4DNxHWKrDkXCZWqGYNZ',
+      clientSecret : 'B342B22F60D960A0F693C7FFFB8F937913C2C54829B3F664FBBC30896DFCA1AE',
+      redirectUri : 'https://fr1638910969386--dev.sandbox.lightning.force.com'
+    }
+  });
+  var username = 'isifuentes@demo3.com.dev';
+  var password = 'Freeway$2022';
+  conn.login(username, password, function(err, userInfo) {
+    console.log("attempting to auth salesforce");
+    if (err) { return console.error(err); }
+    // Now you can get the access token and instance URL information.
+    // Save them to establish connection next time.
+    console.log(conn.accessToken);
+    console.log(conn.instanceUrl);
+    // logged in user property
+    console.log("User ID: " + userInfo.id);
+    console.log("Org ID: " + userInfo.organizationId);
+    // ...
+    var records = [];
+    conn.query("SELECT Id, Name FROM Account", function(err, result) {
+      if (err) { return console.error(err); }
+      console.log("total : " + result.totalSize);
+      console.log("fetched : " + result.records.length);
+      records = result.records;
+      console.log("results : " + records);
+    });
+  });
 });
 
 app.post('/instagram', function(req, res) {
