@@ -32,6 +32,7 @@ conn.query("SELECT Id, Name FROM Account", function(err, result) {
   if (err) { return console.error(err); }
   console.log("total : " + result.totalSize);
   console.log("fetched : " + result.records.length);
+  records = result.records;
 });
 
 app.set('port', (process.env.PORT || 5000));
