@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
 var jsforce = require('jsforce');
+console.log("attempting to auth salesforce");
 var conn = new jsforce.Connection({
   oauth2 : {
     // you can change loginUrl to connect to sandbox or prerelease env.
