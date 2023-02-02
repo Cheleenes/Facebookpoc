@@ -31,6 +31,7 @@ conn.login(username, password, function(err, userInfo) {
     console.log("total : " + result.totalSize);
     console.log("fetched : " + result.records.length);
     records = result.records;
+    console.log("results : " + records);
   });
 });
 
