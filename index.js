@@ -3,7 +3,6 @@ var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
 var jsforce = require('jsforce');
-console.log("attempting to auth salesforce");
 var conn = new jsforce.Connection({
   oauth2 : {
     // you can change loginUrl to connect to sandbox or prerelease env.
@@ -26,6 +25,13 @@ conn.login(username, password, function(err, userInfo) {
   console.log("User ID: " + userInfo.id);
   console.log("Org ID: " + userInfo.organizationId);
   // ...
+});
+
+var records = [];
+conn.query("SELECT Id, Name FROM Account", function(err, result) {
+  if (err) { return console.error(err); }
+  console.log("total : " + result.totalSize);
+  console.log("fetched : " + result.records.length);
 });
 
 app.set('port', (process.env.PORT || 5000));
