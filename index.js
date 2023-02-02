@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 var xhub = require('express-x-hub');
-var jsforce = require('jsforce');
+/*var jsforce = require('jsforce');
 var conn = new jsforce.Connection({
   oauth2 : {
     // you can change loginUrl to connect to sandbox or prerelease env.
@@ -24,7 +24,7 @@ conn.login(username, password, function(err, userInfo) {
   console.log("User ID: " + userInfo.id);
   console.log("Org ID: " + userInfo.organizationId);
   // ...
-});
+});*/
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
