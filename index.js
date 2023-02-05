@@ -69,7 +69,7 @@ app.post('/facebook', function(req, res) {
     console.log("Org ID: " + userInfo.organizationId);
     
     //Salesforce comment insert.
-    var body = JSON.stringify(received_updates, null, 2);
+    var body = JSON.stringify(received_updates2, null, 2);
     conn.apex.post("/InsertFBComment/", body, function(err, res) {
         if (err) { return console.error(err); }
         console.log("response: ", res);
