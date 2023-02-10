@@ -70,9 +70,9 @@ app.post('/facebook', function(req, res) {
     
     //Salesforce comment insert.
     var body = JSON.stringify(received_updates2, null, 2);
-    conn.apex.post("/InsertFBComment/", body, function(err, res) {
+    conn.apex.post("/InsertFBComment/", body, function(err, res2) {
         if (err) { return console.error(err); }
-        console.log("response: ", res);
+        console.log("response: ", res2);
         // the response object structure depends on the definition of apex class
       });
   });
