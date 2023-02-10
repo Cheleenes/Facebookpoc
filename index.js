@@ -44,7 +44,7 @@ app.post('/facebook', function(req, res) {
   // Process the Facebook updates here
   received_updates.unshift(req.body);
   received_updates2 = req.body;
-  res.sendStatus(200);
+  //res.sendStatus(200);
 
   var conn = new jsforce.Connection({
     oauth2 : {
