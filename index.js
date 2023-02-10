@@ -76,6 +76,7 @@ app.post('/facebook', function(req, res) {
         // the response object structure depends on the definition of apex class
       });
   });
+  res.sendStatus(200);
 });
 
 app.post('/instagram', function(req, res) {
